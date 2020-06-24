@@ -84,11 +84,11 @@ public class App
         sshCommandsCombined = "";
 
         sshCommands.add("cd /var/joe");
-        sshCommands.add("ls");
         for(String storeInstanceFile : storeInstanceIdMod){
             System.out.println("adding file ... " + storeInstanceFile);
             sshCommands.add("touch " + "'" + storeInstanceFile + "'");
         }
+        sshCommands.add("ls -ltr");
         sshCommands.add("cd /opt/bbc/jupiter/cardiff-migration-job-creator");
 
         for (String sshCommand : sshCommands) {
@@ -98,7 +98,7 @@ public class App
         System.out.println("executing ssh commands: " + sshCommands);
         sshResults = serverConnection.runCommands(sshCommandsCombined);
 
-        System.out.println("Results:-  \n" + sshResults);
+        System.out.println("Files under /var/joe:-  \n" + sshResults);
         serverConnection.serverDisconnect();
 
     }
